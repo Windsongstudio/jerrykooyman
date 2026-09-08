@@ -1,0 +1,478 @@
+/* ==========================================================================
+   1. ALGEMENE STYLING & LOGO
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 80px 20px 20px 20px;
+    background:#333 url(dots1d.png);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #888;
+    /* Dwingt hardware-versnelling af voor soepeler scrollen op iOS/Safari */
+    -webkit-overflow-scrolling: touch;
+}
+
+html {
+    overflow-y: scroll;
+    scroll-behavior: smooth; /* Zorgt voor een vloeiende, soepele scrollbeweging */
+}
+
+#header-placeholder {
+    display: block;
+    min-height: 70px; /* VERANDER DIT: Meet exact hoeveel pixels hoog jouw header is! */
+}
+
+.header-container {
+    position: fixed; 
+    top: 0px; /* Sluit netjes aan op de body-padding van 20px */
+    
+    /* FIX VOOR BREEDTE OP KLEINE SCHERMEN:
+       We starten op 20px vanaf links (vanwege de body padding). 
+       De breedte moet dus 100% min de 20px links en 20px rechts (= 40px) zijn. */
+    left: 20px;
+    width: calc(100% - 40px);
+    
+    /* FIX VOOR BREEDTE OP GROTE SCHERMEN:
+       Zodra het scherm breder wordt dan 1400px, mag de header 
+       nooit breder worden dan die 1400px. */
+    max-width: 1400px; 
+    
+    /* OMDAT DE BODY GECENTREERD IS OP GROTE SCHERMEN:
+       Moet de fixed header op grote schermen ook de 'margin: 0 auto' overnemen.
+       Bij fixed elementen werkt dit ALLEEN als er ook een 'right: 20px' (of 0) is ingesteld 
+       als tegenhanger van de 'left', zodat de browser de marge kan berekenen. */
+    right: 20px;
+    margin: 0 auto;
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;     
+    
+    border: solid 0px darkred;
+    padding: 0 20px; 
+    box-sizing: border-box;
+    z-index: 1000;
+
+    background: rgba(51, 51, 51, 0.75); /* Iets transparanter gemaakt */
+    -webkit-backdrop-filter: blur(5px); /* Vervaagt de content erachter (Safari) */
+    backdrop-filter: blur(5px);         /* Vervaagt de content erachter (Moderne browsers) */
+    height: 70px;
+}
+
+#main-content {
+    border: solid 0px darkred;
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto; /* Lijnt exact gelijk uit met de header */
+    text-align: center;
+    box-sizing: border-box;
+    
+    opacity: 0;
+    animation: fadeIn 1.0s ease-in-out forwards;
+}
+
+#main-content img {
+    width: 100%;
+    height: auto;
+    display: inline-block; /* Zorgt dat de text-align: center van de ouder werkt op de foto */
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+img {
+    max-height: 75vh !important; /* Maximaal 75% van de schermhoogte */
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.no-shadow,
+.no-shadow img {
+    box-shadow: none !important;
+}
+
+
+h1 {
+    text-align:center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #999;
+    margin:0px 0px 0px 0px;
+} 
+
+h2 {
+    
+    font-weight: bold;
+    font-size: 20px;
+    color: #999;
+    margin:10px 0px 10px 0px;
+    text-align:center;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 10px;
+    font-style: italic;
+    color: #A9A9A9;
+    margin:40px 0px 0px 0px;
+    text-align:center;
+} 
+
+#logo {
+    border: solid 0px #fff;
+    margin: 0px 0px 0px 0px;
+    float: left;
+}
+
+#jerrykooyman {
+    border: solid 0px #fff;
+    color: #888;
+    font-weight: normal;
+    font-size: 24px;
+    text-align: justify;
+    letter-spacing: 0.1em;
+}
+
+#jerrykooyman a {
+    color: #888;
+    text-decoration: none;
+}
+
+#photography {
+	color: #555;
+	font-weight: normal;
+	font-size: 20px;
+	text-align: justify;
+	letter-spacing: 0.380em;
+	border:solid 0px #fff;
+}
+
+.textshadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#contact {
+    text-align:center;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* ==========================================================================
+   2. Navigatie Menu Horizontaal
+   ========================================================================== */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    }
+
+nav ul li a {
+    color: #888;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+    }
+
+nav ul li a:hover {
+    color: #fff;
+    }
+
+ul.menu li a:hover {
+    border-bottom:solid 2px #A52327;
+    color: #A9A9A9;
+    }
+
+ul li a.active {
+    color: #fff;
+    border-bottom: solid 2px #A52327;
+}
+
+/* ==========================================================================    
+body.home ul.menu li.home a,
+body.portfolio ul.menu li.portfolio a,
+body.digitaliseren ul.menu li.digitaliseren a,
+body.contact ul.menu li.contact a {
+    color:#A9A9A9;
+    border-bottom:solid 2px #A52327;
+    }
+========================================================================== */
+
+/* ==========================================================================
+   3. FLICKR GALERIE GRID & THUMBNAILS (VERBETERDE VERSIE)
+   ========================================================================== */
+.galerie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Matcht met de 'gap' variabele in je script.js */
+    max-width: 1400px;
+    margin: 0 auto;
+    clear: both;
+}
+
+.foto-wrapper {
+    overflow: hidden;
+    /* Verander dit van #222 naar puur zwart om het grijze randje op te lossen */
+    background-color: #000; 
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+
+    transform: translateZ(0);
+}
+
+.foto-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    
+    /* Vloeiende fade-in logica: start volledig onzichtbaar */
+    opacity: 0;
+    transform: scale(0.98); /* Licht verkleind voor een subtiel opkomend effect */
+    transition: opacity 1.0s ease-in-out, transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Zodra JavaScript de maten heeft berekend, fadet de foto hier prachtig in */
+.foto-wrapper img.geladen {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Elegant hover-effect voor interactie */
+.foto-wrapper img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* ==========================================================================
+   4. LIGHTBOX POP-UP
+   ========================================================================== */
+.lightbox {
+    display: none; /* Wordt 'flex' via JavaScript */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.50);
+
+    -webkit-backdrop-filter: blur(15px); /* Voor Safari */
+    backdrop-filter: blur(15px);         /* Voor moderne browsers */
+
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 75vh; /* AANGEPAST: Iets verlaagd zodat er altijd ruimte onder de foto is */
+    object-fit: contain;
+    border: solid 1px #888;
+    border-radius: 2px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    /* Rotsvast onderaan gepositioneerd */
+    position: absolute;
+    /* AANGEPAST: Iets dichter bij de bodem gezet (van 30px naar 20px) 
+        Hierdoor zakt het hele blok inclusief titel als één geheel naar beneden */
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #999;
+    text-align: center;
+    font-size: 1.0rem;
+    line-height: 1.3;
+    width: 80%;
+    max-width: 800px;
+    
+    /* AANGEPAST: Padding-top is weg, zodat de omschrijving strak aansluit */
+    padding-top: 0; 
+    
+    /* AANGEPAST: Min-height terug naar de compacte basiswaarde */
+    min-height: 90px; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.lightbox-caption strong {
+    font-size: 1.0rem;
+    letter-spacing: 0.5px;
+    color: #999;
+}
+
+/* Lightbox Knoppen */
+.lightbox-btn {
+    position: absolute;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 20px;
+    transition: color 0.2s, transform 0.2s;
+    user-select: none;
+    z-index: 1010;
+}
+
+.lightbox-btn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.lightbox-close {
+    top: 20px;
+    right: 20px;
+    font-size: 3.5rem;
+    line-height: 1;
+}
+
+.lightbox-prev {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.lightbox-prev:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-next {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.lightbox-next:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+/* ==========================================================================
+   5. Mobiele optimalisaties voor de knoppen
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    body {
+    padding: 200px 20px 20px 20px;
+    }
+
+    .header-container {
+        /* 1. Laat de vaste hoogte van 100px los zodat de header verticaal kan groeien */
+        height: auto; 
+        
+        /* 2. Zorg dat het logo en menu onder elkaar komen te staan (indien nodig) */
+        flex-direction: column; 
+        
+        /* 3. Geef de header wat ademruimte aan de boven- en onderkant */
+        padding: 15px 20px; 
+        
+        /* Zorgt dat het logo en menu netjes uitlijnen in de nieuwe layout */
+        align-items: center; 
+    }
+
+    /* 4. OMDAT DE HEADER HIER HOGER WORDT, MOET DE PLACEHOLDER MEEGROEIEN:
+          We veranderen min-height naar 'auto' zodat de placeholder exact de ruimte 
+          vrijhoudt die de fixed header op dat moment nodig heeft. */
+    #header-placeholder {
+        min-height: auto;
+        
+        /* We schatten hier de nieuwe mobiele hoogte in (bijv. 160px voor logo + menu).
+           Pas dit getal aan naar de werkelijke hoogte van jouw mobiele header! */
+        height: 160px; 
+    }
+    .lightbox-btn {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+    }
+    .lightbox-caption {
+        font-size: 0.95rem;
+        /* AANGEPAST: Iets meer ademruimte en lagere min-height op mobiel */
+        bottom: 20px;
+        min-height: 75px; 
+    }
+    
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #logo {
+        margin: 0;
+        float: none;
+    }
+
+    nav {
+        border: solid 0px #fff;
+        margin-top: 10px;
+    }
+
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .galerie {
+        display: flex;
+        flex-direction: column;
+        gap: 16px !important;
+    }
+
+    .galerie .foto-wrapper {
+        width: 100% !important;
+        height: auto !important; /* Laat de hoogte automatisch meebewegen met de foto */
+        max-height: none !important;
+        background-color: transparent !important; /* Geen zwarte opvulvlakken meer */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .galerie .foto-wrapper img {
+        width: 100% !important;
+        height: auto !important; /* Bewaakt de juiste verhouding van de foto */
+        max-height: none !important;
+        object-fit: initial !important; /* Schakelt object-fit uit zodat de foto intact blijft */
+        display: block;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Als fallback als data-aspect niet direct door CSS gelezen wordt, 
+       pakken we de natuurlijke verhouding via object-fit en een flexibele container */
+    .galerie .foto-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        background-color: #000;
+    }
+}
