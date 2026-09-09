@@ -1,12 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
+function injectHeader() {
   const headerContainer = document.getElementById("site-header");
-  if (!headerContainer) return;
 
-  // Gebruik direct een relatief pad zonder schuine strepen vooraan
+  // Als het element nog niet op het scherm staat, probeer het over 50ms opnieuw
+  if (!headerContainer) {
+    setTimeout(injectHeader, 50);
+    return;
+  }
+
+  // Element is gevonden! Haal nu header.html op
   fetch("header.html")
     .then(response => {
       if (!response.ok) {
-        throw new Error("HTTP fout! Status: " + response.status);
+        throw new Error("Kan header.html niet vinden (Status: " + response.status + ")");
       }
       return response.text();
     })
@@ -14,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
       headerContainer.innerHTML = html;
     })
     .catch(err => {
-      console.error("Fout bij laden van header.html:", err);
+      console.error("Header laadfout:", err);
     });
-});
+}
+
+// Start direct de controle zodra het script wordt aangeroepen
+injectHeader();
