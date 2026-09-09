@@ -8,14 +8,15 @@ class SiteHeader extends HTMLElement {
           </div>   
           <nav>
               <ul>
-                  <li><a href="index">Home</a></li>
-                  <li><a href="portfolio">Portfolio</a></li>
-                  <li><a href="digitaliseren-dias-negatieven">Digitaliseren</a></li>
-                  <li><a href="contact">Contact</a></li>
+                  <li><a href="/index.html">Home</a></li>
+                  <li><a href="/portfolio.html">Portfolio</a></li>
+                  <li><a href="/digitaliseren-dias-negatieven.html">Digitaliseren</a></li>
+                  <li><a href="/contact.html">Contact</a></li>
               </ul>
           </nav>
       </div>
     `;
   }
 }
+
 customElements.define('site-header', SiteHeader);
