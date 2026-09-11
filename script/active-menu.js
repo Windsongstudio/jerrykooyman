@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Haal het pad op en haal eventueel .php aan het einde weg
-    let currentLocation = window.location.pathname.replace('.php', '');
+    // Haal het pad op en haal eventueel .html aan het einde weg
+    let currentLocation = window.location.pathname.replace('.html', '');
     
     // Zorg dat een lege URL of alleen een slash wordt gezien als de homepage ('/')
     if (currentLocation === "" || currentLocation === "/") {
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
     menuLinks.forEach(link => {
         let href = link.getAttribute('href');
         
-        // Haal ook bij de href eventueel .php weg voor de zekerheid
+        // Haal ook bij de href eventueel .html weg voor de zekerheid
         if (href) {
-            href = href.replace('.php', '');
+            href = href.replace('.html', '');
         }
         
         // Check voor de homepage
