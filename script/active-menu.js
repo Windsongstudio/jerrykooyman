@@ -1,28 +1,28 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Haal het pad op en haal eventueel .php aan het einde weg
-    let currentLocation = window.location.pathname.replace('.php', '');
-    
-    // Zorg dat een lege URL of alleen een slash wordt gezien als de homepage ('/')
-    if (currentLocation === "" || currentLocation === "./") {
-        currentLocation = "./";
+document.addEventListener("headerLoaded", function() {
+    // Haal het pad op en haal eventueel .html aan het einde weg
+    let currentLocation = window.location.pathname.replace(/\.html$/, '');
+
+    // Haal trailing slash weg (behalve als het pad exact "/" is), en pak laatste segment
+    let currentPage = currentLocation.replace(/\/$/, '').split('/').pop();
+
+    // Lege string (homepage) wordt "index"
+    if (currentPage === "") {
+        currentPage = "index";
     }
 
     const menuLinks = document.querySelectorAll('nav ul li a');
-    
+
     menuLinks.forEach(link => {
         let href = link.getAttribute('href');
-        
-        // Haal ook bij de href eventueel .php weg voor de zekerheid
-        if (href) {
-            href = href.replace('.php', '');
+        if (!href) return;
+
+        // Haal .html weg en pak laatste segment van de href
+        let linkPage = href.replace(/\.html$/, '').replace(/\/$/, '').split('/').pop();
+        if (linkPage === "") {
+            linkPage = "index";
         }
-        
-        // Check voor de homepage
-        if (currentLocation === "./" && (href === "/" || href === "" || href === "index")) {
-            link.classList.add('active');
-        } 
-        // Check voor alle andere pagina's (bijv. /portfolio matcht met portfolio)
-        else if (href && href !== "./" && currentLocation.includes(href)) {
+
+        if (linkPage === currentPage) {
             link.classList.add('active');
         }
     });

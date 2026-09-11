@@ -16,6 +16,8 @@ function loadHeader() {
     .then(html => {
       headerContainer.innerHTML = html;
       console.log("Header succesvol geladen!");
+      // Laat de rest van de pagina weten dat de header (en dus de nav) nu in de DOM staat
+      document.dispatchEvent(new Event("headerLoaded"));
     })
     .catch(err => console.error("Netwerkfout bij laden header:", err));
 }
